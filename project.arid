@@ -2,3 +2,4 @@ pyversions += 2
 years += 2014
 author = Andrzej Cichocki
 name = mynblep
+projects += pyrbo
