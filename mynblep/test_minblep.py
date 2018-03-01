@@ -16,9 +16,8 @@
 # along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
 
 import unittest, numpy as np
-from .minblep import MinBleps
+from .minblep import MinBleps, floatdtype
 from collections import namedtuple
-from .shapes import floatdtype
 
 class TestMinBleps(unittest.TestCase):
 
