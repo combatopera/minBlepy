@@ -18,9 +18,10 @@
 from __future__ import division
 import numpy as np, fractions, logging, os, cPickle as pickle
 from .paste import pasteminbleps, X
-from .shapes import floatdtype
 
 log = logging.getLogger(__name__)
+
+floatdtype = np.float32 # Effectively about 24 bits.
 
 class MinBleps:
 
