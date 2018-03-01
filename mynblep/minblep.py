@@ -18,7 +18,6 @@
 from __future__ import division
 import numpy as np, fractions, logging, os, cPickle as pickle
 from .paste import pasteminbleps, X
-from diapyr import types
 from .iface import Config
 from .ym2149 import ClockInfo
 from .shapes import floatdtype
@@ -149,7 +148,3 @@ class MinBleps:
 
   def paste(self, naivex, diffbuf, outbuf):
     self.pasteminbleps(len(diffbuf), outbuf.buf, self.naivex2outx, len(outbuf), self.demultiplexed, self.naivex2off, diffbuf.buf, naivex, self.naiverate, self.outrate)
-
-@types(Config, ClockInfo, this = MinBleps)
-def loadorcreate(config, clockinfo):
-    return MinBleps.loadorcreate(clockinfo.implclock, config.outputrate, None)
