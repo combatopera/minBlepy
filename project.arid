@@ -1,5 +1,4 @@
-pyversions +=
-    2
+pyversions += 2
 years += 2014
 author = Andrzej Cichocki
-name = minblepy
+name = mynblep
