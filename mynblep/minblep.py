@@ -39,15 +39,10 @@ class MinBleps:
       raise Exception("Expected scale %s but ideal is %s." % (scaleornone, idealscale))
     return idealscale
 
-  @staticmethod
-  def minrepr(n):
-    # Note int will return a long if the value is really too big for int:
-    return repr(int(n) if isinstance(n, long) else n)
-
   @classmethod
   def loadorcreate(cls, naiverate, outrate, scaleornone, cutoff = defaultcutoff, transition = defaulttransition):
     scale = cls.resolvescale(naiverate, outrate, scaleornone)
-    name = "%s(%s)" % (cls.__name__, ','.join(map(cls.minrepr, [naiverate, outrate, scale, cutoff, transition])))
+    name = "%s(%s)" % (cls.__name__, ','.join(map(repr, [naiverate, outrate, scale, cutoff, transition])))
     path = os.path.join(os.path.dirname(__file__), name)
     if os.path.exists(path):
       log.debug("Loading cached minBLEPs: %s", path)
