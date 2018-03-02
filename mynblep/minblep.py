@@ -15,8 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
 
-
-import numpy as np, fractions, logging, os, pickle as pickle
+import numpy as np, fractions, logging, os, pickle
 from .paste import pasteminbleps, X
 from .shapes import floatdtype
 
