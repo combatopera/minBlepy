@@ -1,5 +1,6 @@
-pyversions += 2
+pyversions += 3
 years += 2014
 author = Andrzej Cichocki
 name = mynblep
 projects += pyrbo
+branch pyrbo = py3
