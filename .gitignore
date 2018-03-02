@@ -1,3 +1,4 @@
 #gclean
 *.pyc
 *_turbo/
+/mynblep/MinBleps(*)
