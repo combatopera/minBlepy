@@ -29,7 +29,7 @@ def pasteminbleps(ampsize, outp, naivex2outxp, outsize, demultiplexedp, naivex2o
   dcindex = 0
   while ampsize:
     ampchunk = min(ampsize, naiverate - naivex)
-    for naivex in xrange(naivex, naivex + ampchunk):
+    for naivex in range(naivex, naivex + ampchunk):
       a = ampp[0]
       ampp += 1
       if a:
@@ -37,20 +37,20 @@ def pasteminbleps(ampsize, outp, naivex2outxp, outsize, demultiplexedp, naivex2o
         mixinp = demultiplexedp + naivex2offp[naivex]
         if dcindex <= i: # We can DC-adjust while pasting this mixin.
           dccount = i - dcindex
-          for UNROLL in xrange(dccount):
+          for UNROLL in range(dccount):
             outp[0] += dclevel
             outp += 1
-          for UNROLL in xrange(mixinsize):
+          for UNROLL in range(mixinsize):
             outp[0] += mixinp[0] * a + dclevel
             outp += 1
             mixinp += 1
         else: # The mixin starts before the pending DC adjustment.
           dccount = i + mixinsize - dcindex
-          for UNROLL in xrange(dccount):
+          for UNROLL in range(dccount):
             outp[0] += dclevel
             outp += 1
           outp -= mixinsize
-          for UNROLL in xrange(mixinsize):
+          for UNROLL in range(mixinsize):
             outp[0] += mixinp[0] * a
             outp += 1
             mixinp += 1
@@ -60,6 +60,6 @@ def pasteminbleps(ampsize, outp, naivex2outxp, outsize, demultiplexedp, naivex2o
     naivex = 0
     out0 -= outrate
   dccount = outsize - dcindex
-  for UNROLL in xrange(dccount):
+  for UNROLL in range(dccount):
     outp[0] += dclevel
     outp += 1

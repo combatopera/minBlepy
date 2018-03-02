@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
-import numpy as np, fractions, logging, os, cPickle as pickle
+
+import numpy as np, fractions, logging, os, pickle as pickle
 from .paste import pasteminbleps, X
 from .shapes import floatdtype
 
@@ -109,11 +109,11 @@ class MinBleps:
     self.naivex2outx = nearest // scale
     self.naivex2shape = self.naivex2outx * scale - nearest + scale - 1
     self.demultiplexed = np.empty(self.minblep.shape, dtype = self.minblep.dtype)
-    for i in xrange(scale):
+    for i in range(scale):
       self.demultiplexed[i * self.mixinsize:(i + 1) * self.mixinsize] = self.minblep[i::scale]
     self.naivex2off = self.naivex2shape * self.mixinsize
     self.outx2minnaivex = np.empty(outrate, dtype = self.naivex2outx.dtype)
-    for naivex in xrange(naiverate - 1, -1, -1):
+    for naivex in range(naiverate - 1, -1, -1):
       self.outx2minnaivex[self.naivex2outx[naivex]] = naivex
     log.debug('%s minBLEPs created.', scale)
     self.naiverate = naiverate

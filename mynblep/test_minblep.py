@@ -37,7 +37,7 @@ class TestMinBleps(unittest.TestCase):
         minbleps = MinBleps.create(ctrlrate, outrate, scale)
         mixins = []
         MixinInfo = namedtuple('MixinInfo', 'outi shape data')
-        for x in xrange(ctrlrate * 2):
+        for x in range(ctrlrate * 2):
             outi = minbleps.naivex2outx[x % ctrlrate]
             shape = minbleps.naivex2shape[x % ctrlrate]
             data = minbleps.minblep[shape::scale]
@@ -47,23 +47,23 @@ class TestMinBleps(unittest.TestCase):
 
     def test_counts(self):
         mb = MinBleps.create(10, 6, 5)
-        self.assertEqual([0, 0, 1, 1, 2, 3, 3, 4, 4, 5], [mb.getoutcount(0, n) for n in xrange(10)])
-        self.assertEqual([0, 1, 1, 2, 3, 3, 4, 4, 5, 6], [mb.getoutcount(1, n) for n in xrange(10)])
-        self.assertEqual([0, 0, 1, 2, 2, 3, 3, 4, 5, 5], [mb.getoutcount(2, n) for n in xrange(10)])
-        self.assertEqual([0, 1, 2, 2, 3, 3, 4, 5, 5, 6], [mb.getoutcount(3, n) for n in xrange(10)])
-        self.assertEqual([0, 1, 1, 2, 2, 3, 4, 4, 5, 5], [mb.getoutcount(4, n) for n in xrange(10)])
-        self.assertEqual([0, 0, 1, 1, 2, 3, 3, 4, 4, 5], [mb.getoutcount(5, n) for n in xrange(10)])
-        self.assertEqual([0, 1, 1, 2, 3, 3, 4, 4, 5, 6], [mb.getoutcount(6, n) for n in xrange(10)])
-        self.assertEqual([0, 0, 1, 2, 2, 3, 3, 4, 5, 5], [mb.getoutcount(7, n) for n in xrange(10)])
-        self.assertEqual([0, 1, 2, 2, 3, 3, 4, 5, 5, 6], [mb.getoutcount(8, n) for n in xrange(10)])
-        self.assertEqual([0, 1, 1, 2, 2, 3, 4, 4, 5, 5], [mb.getoutcount(9, n) for n in xrange(10)])
-        self.assertEqual([0, 2, 4, 5, 7, 9, 10, 12, 14, 15], [mb.getminnaiven(0, n) for n in xrange(10)])
-        self.assertEqual([-1, 1, 3, 4, 6, 8, 9, 11, 13, 14], [mb.getminnaiven(1, n) for n in xrange(10)])
-        self.assertEqual([0, 2, 3, 5, 7, 8, 10, 12, 13, 15], [mb.getminnaiven(2, n) for n in xrange(10)])
-        self.assertEqual([-1, 1, 2, 4, 6, 7, 9, 11, 12, 14], [mb.getminnaiven(3, n) for n in xrange(10)])
-        self.assertEqual([0, 1, 3, 5, 6, 8, 10, 11, 13, 15], [mb.getminnaiven(4, n) for n in xrange(10)])
-        self.assertEqual([0, 2, 4, 5, 7, 9, 10, 12, 14, 15], [mb.getminnaiven(5, n) for n in xrange(10)])
-        self.assertEqual([-1, 1, 3, 4, 6, 8, 9, 11, 13, 14], [mb.getminnaiven(6, n) for n in xrange(10)])
-        self.assertEqual([0, 2, 3, 5, 7, 8, 10, 12, 13, 15], [mb.getminnaiven(7, n) for n in xrange(10)])
-        self.assertEqual([-1, 1, 2, 4, 6, 7, 9, 11, 12, 14], [mb.getminnaiven(8, n) for n in xrange(10)])
-        self.assertEqual([0, 1, 3, 5, 6, 8, 10, 11, 13, 15], [mb.getminnaiven(9, n) for n in xrange(10)])
+        self.assertEqual([0, 0, 1, 1, 2, 3, 3, 4, 4, 5], [mb.getoutcount(0, n) for n in range(10)])
+        self.assertEqual([0, 1, 1, 2, 3, 3, 4, 4, 5, 6], [mb.getoutcount(1, n) for n in range(10)])
+        self.assertEqual([0, 0, 1, 2, 2, 3, 3, 4, 5, 5], [mb.getoutcount(2, n) for n in range(10)])
+        self.assertEqual([0, 1, 2, 2, 3, 3, 4, 5, 5, 6], [mb.getoutcount(3, n) for n in range(10)])
+        self.assertEqual([0, 1, 1, 2, 2, 3, 4, 4, 5, 5], [mb.getoutcount(4, n) for n in range(10)])
+        self.assertEqual([0, 0, 1, 1, 2, 3, 3, 4, 4, 5], [mb.getoutcount(5, n) for n in range(10)])
+        self.assertEqual([0, 1, 1, 2, 3, 3, 4, 4, 5, 6], [mb.getoutcount(6, n) for n in range(10)])
+        self.assertEqual([0, 0, 1, 2, 2, 3, 3, 4, 5, 5], [mb.getoutcount(7, n) for n in range(10)])
+        self.assertEqual([0, 1, 2, 2, 3, 3, 4, 5, 5, 6], [mb.getoutcount(8, n) for n in range(10)])
+        self.assertEqual([0, 1, 1, 2, 2, 3, 4, 4, 5, 5], [mb.getoutcount(9, n) for n in range(10)])
+        self.assertEqual([0, 2, 4, 5, 7, 9, 10, 12, 14, 15], [mb.getminnaiven(0, n) for n in range(10)])
+        self.assertEqual([-1, 1, 3, 4, 6, 8, 9, 11, 13, 14], [mb.getminnaiven(1, n) for n in range(10)])
+        self.assertEqual([0, 2, 3, 5, 7, 8, 10, 12, 13, 15], [mb.getminnaiven(2, n) for n in range(10)])
+        self.assertEqual([-1, 1, 2, 4, 6, 7, 9, 11, 12, 14], [mb.getminnaiven(3, n) for n in range(10)])
+        self.assertEqual([0, 1, 3, 5, 6, 8, 10, 11, 13, 15], [mb.getminnaiven(4, n) for n in range(10)])
+        self.assertEqual([0, 2, 4, 5, 7, 9, 10, 12, 14, 15], [mb.getminnaiven(5, n) for n in range(10)])
+        self.assertEqual([-1, 1, 3, 4, 6, 8, 9, 11, 13, 14], [mb.getminnaiven(6, n) for n in range(10)])
+        self.assertEqual([0, 2, 3, 5, 7, 8, 10, 12, 13, 15], [mb.getminnaiven(7, n) for n in range(10)])
+        self.assertEqual([-1, 1, 2, 4, 6, 7, 9, 11, 12, 14], [mb.getminnaiven(8, n) for n in range(10)])
+        self.assertEqual([0, 1, 3, 5, 6, 8, 10, 11, 13, 15], [mb.getminnaiven(9, n) for n in range(10)])
