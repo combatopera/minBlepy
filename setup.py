@@ -19,5 +19,5 @@ import setuptools
 
 setuptools.setup(
         name = 'mynblep',
-        version = '1-SNAPSHOT',
+        version = '1',
         packages = setuptools.find_packages())
