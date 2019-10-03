@@ -2,3 +2,6 @@
 *.pyc
 *_turbo/
 /mynblep/MinBleps(*)
+/build/
+/mynblep.egg-info/
+/dist/
