@@ -19,6 +19,6 @@ import setuptools
 
 setuptools.setup(
         name = 'mynblep',
-        version = '2-SNAPSHOT',
+        version = '2',
         install_requires = ['numpy', 'pyrbo'],
         packages = setuptools.find_packages())
