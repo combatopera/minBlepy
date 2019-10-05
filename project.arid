@@ -21,4 +21,3 @@ author = Andrzej Cichocki
 name = mynblep
 deps += numpy
 projects += pyrbo
-branch pyrbo = py3
