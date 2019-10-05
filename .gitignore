@@ -5,3 +5,5 @@
 /build/
 /mynblep.egg-info/
 /dist/
+/setup.py
+/setup.cfg
