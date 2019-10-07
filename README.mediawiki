@@ -1,7 +1,0 @@
-{|
-! master
-! py2
-|-
-| [[Image:https://travis-ci.org/combatopera/mynblep.svg?branch=master]]
-| [[Image:https://travis-ci.org/combatopera/mynblep.svg?branch=py2]]
-|}
