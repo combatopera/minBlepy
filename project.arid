@@ -19,5 +19,6 @@ pyversions += 3
 years += 2014
 author = Andrzej Cichocki
 name = mynblep
-deps += numpy
-projects += pyrbo
+requires +=
+    numpy
+    pyrbo
