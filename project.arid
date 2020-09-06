@@ -20,5 +20,5 @@ years += 2014
 author = Andrzej Cichocki
 name = mynblep
 requires +=
-    numpy
-    pyrbo
+    numpy>=1.19.1
+    pyrbo>=5
