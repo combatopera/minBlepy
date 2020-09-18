@@ -23,43 +23,43 @@ mixinsize = None
 
 @turbo(ampsize = u4, outp = [np.float32], naivex2outxp = [np.int32], outsize = u4, demultiplexedp = [np.float32], naivex2offp = [np.int32], ampp = [np.float32], naivex = u4, naiverate = u4, outrate = u4, out0 = u4, dclevel = np.float32, dcindex = u4, ampchunk = u4, a = np.float32, i = u4, dccount = u4, mixinp = [np.float32], mixinsize = X)
 def pasteminbleps(ampsize, outp, naivex2outxp, outsize, demultiplexedp, naivex2offp, ampp, naivex, naiverate, outrate):
-  # TODO LATER: This code needs tests.
-  out0 = naivex2outxp[naivex]
-  dclevel = 0
-  dcindex = 0
-  while ampsize:
-    ampchunk = min(ampsize, naiverate - naivex)
-    for naivex in range(naivex, naivex + ampchunk):
-      a = ampp[0]
-      ampp += 1
-      if a:
-        i = naivex2outxp[naivex] - out0
-        mixinp = demultiplexedp + naivex2offp[naivex]
-        if dcindex <= i: # We can DC-adjust while pasting this mixin.
-          dccount = i - dcindex
-          for UNROLL in range(dccount):
-            outp[0] += dclevel
-            outp += 1
-          for UNROLL in range(mixinsize):
-            outp[0] += mixinp[0] * a + dclevel
-            outp += 1
-            mixinp += 1
-        else: # The mixin starts before the pending DC adjustment.
-          dccount = i + mixinsize - dcindex
-          for UNROLL in range(dccount):
-            outp[0] += dclevel
-            outp += 1
-          outp -= mixinsize
-          for UNROLL in range(mixinsize):
-            outp[0] += mixinp[0] * a
-            outp += 1
-            mixinp += 1
-        dcindex = i + mixinsize
-        dclevel += a
-    ampsize -= ampchunk
-    naivex = 0
-    out0 -= outrate
-  dccount = outsize - dcindex
-  for UNROLL in range(dccount):
-    outp[0] += dclevel
-    outp += 1
+    # TODO LATER: This code needs tests.
+    out0 = naivex2outxp[naivex]
+    dclevel = 0
+    dcindex = 0
+    while ampsize:
+        ampchunk = min(ampsize, naiverate - naivex)
+        for naivex in range(naivex, naivex + ampchunk):
+            a = ampp[0]
+            ampp += 1
+            if a:
+                i = naivex2outxp[naivex] - out0
+                mixinp = demultiplexedp + naivex2offp[naivex]
+                if dcindex <= i: # We can DC-adjust while pasting this mixin.
+                    dccount = i - dcindex
+                    for UNROLL in range(dccount):
+                        outp[0] += dclevel
+                        outp += 1
+                    for UNROLL in range(mixinsize):
+                        outp[0] += mixinp[0] * a + dclevel
+                        outp += 1
+                        mixinp += 1
+                else: # The mixin starts before the pending DC adjustment.
+                    dccount = i + mixinsize - dcindex
+                    for UNROLL in range(dccount):
+                        outp[0] += dclevel
+                        outp += 1
+                    outp -= mixinsize
+                    for UNROLL in range(mixinsize):
+                        outp[0] += mixinp[0] * a
+                        outp += 1
+                        mixinp += 1
+                dcindex = i + mixinsize
+                dclevel += a
+        ampsize -= ampchunk
+        naivex = 0
+        out0 -= outrate
+    dccount = outsize - dcindex
+    for UNROLL in range(dccount):
+        outp[0] += dclevel
+        outp += 1
