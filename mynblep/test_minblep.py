@@ -15,12 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
 
-import unittest, numpy as np
 from .minblep import MinBleps
-from collections import namedtuple
 from .shapes import floatdtype
+from collections import namedtuple
+from unittest import TestCase
+import numpy as np
 
-class TestMinBleps(unittest.TestCase):
+class TestMinBleps(TestCase):
 
     def test_minphasereconstruction(self):
         minbleps = MinBleps.create(500, 1, 500)

@@ -15,9 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
 
-import numpy as np, fractions, logging, os, pickle
 from .paste import pasteminbleps, X
 from .shapes import floatdtype
+from fractions import gcd
+import logging, numpy as np, os, pickle
 
 log = logging.getLogger(__name__)
 
@@ -33,7 +34,7 @@ class MinBleps:
 
   @staticmethod
   def resolvescale(naiverate, outrate, scaleornone):
-    idealscale = naiverate // fractions.gcd(naiverate, outrate)
+    idealscale = naiverate // gcd(naiverate, outrate)
     if scaleornone is not None and scaleornone != idealscale:
       raise Exception("Expected scale %s but ideal is %s." % (scaleornone, idealscale))
     return idealscale
@@ -103,7 +104,7 @@ class MinBleps:
     self.minblep = np.append(self.minblep, np.ones(ones, floatdtype))
     self.mixinsize = len(self.minblep) // scale
     # The naiverate and outrate will line up at 1 second:
-    dualscale = outrate // fractions.gcd(naiverate, outrate)
+    dualscale = outrate // gcd(naiverate, outrate)
     nearest = np.arange(naiverate, dtype = np.int32) * dualscale
     self.naivex2outx = nearest // scale
     self.naivex2shape = self.naivex2outx * scale - nearest + scale - 1

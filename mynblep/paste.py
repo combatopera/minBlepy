@@ -15,9 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
 
-import numpy as np
-from pyrbo import turbo, X
 from .const import u4
+from pyrbo import turbo, X
+import numpy as np
 
 mixinsize = None
 
