@@ -65,5 +65,5 @@ def pasteminbleps(ampsize, outp, naivex2outxp, outsize, demultiplexedp, naivex2o
         outp += 1
 
 def warmup():
-    for n in range(1, 201):
+    for n in range(101, 111): # TODO: More.
         pasteminbleps[X, n]
