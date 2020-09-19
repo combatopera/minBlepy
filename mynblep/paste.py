@@ -63,3 +63,7 @@ def pasteminbleps(ampsize, outp, naivex2outxp, outsize, demultiplexedp, naivex2o
     for UNROLL in range(dccount):
         outp[0] += dclevel
         outp += 1
+
+def warmup():
+    for n in range(1, 201):
+        pasteminbleps[X, n]

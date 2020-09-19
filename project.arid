@@ -22,3 +22,4 @@ name = mynblep
 requires +=
     numpy>=1.19.1
     pyrbo>=5
+warmups += mynblep.paste:warmup
