@@ -21,7 +21,7 @@ import numpy as np
 
 mixinsize = None
 
-@turbo(ampsize = u4, outp = [np.float32], naivex2outxp = [np.int32], outsize = u4, demultiplexedp = [np.float32], naivex2offp = [np.int32], ampp = [np.float32], naivex = u4, naiverate = u4, outrate = u4, out0 = u4, dclevel = np.float32, dcindex = u4, ampchunk = u4, a = np.float32, i = u4, dccount = u4, mixinp = [np.float32], mixinsize = X(1, 200))
+@turbo(types = dict(ampsize = u4, outp = [np.float32], naivex2outxp = [np.int32], outsize = u4, demultiplexedp = [np.float32], naivex2offp = [np.int32], ampp = [np.float32], naivex = u4, naiverate = u4, outrate = u4, out0 = u4, dclevel = np.float32, dcindex = u4, ampchunk = u4, a = np.float32, i = u4, dccount = u4, mixinp = [np.float32], mixinsize = X), groupsets = {X: [range(k, k + s) for s in [20] for k in range(1, 201, s)]})
 def pasteminbleps(ampsize, outp, naivex2outxp, outsize, demultiplexedp, naivex2offp, ampp, naivex, naiverate, outrate):
     # TODO LATER: This code needs tests.
     out0 = naivex2outxp[naivex]
@@ -65,5 +65,6 @@ def pasteminbleps(ampsize, outp, naivex2outxp, outsize, demultiplexedp, naivex2o
         outp += 1
 
 def warmup():
-    # XXX: Instead of dedicated API, a mode that turns off the import and thus compile?
-    pasteminbleps.updatefiles(X, 1)
+    for n in range(1, 201):
+        # XXX: Instead of dedicated API, a mode that turns off the import and thus compile?
+        pasteminbleps.updatefiles(X, n)
