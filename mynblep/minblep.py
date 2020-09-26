@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
 
-from .paste import pasteminbleps, X
+from .paste import pasteminbleps
 from .shapes import floatdtype
 from fractions import gcd
 import logging, numpy as np, os, pickle
@@ -63,11 +63,11 @@ class MinBleps:
                 f.flush()
             finally:
                 f.close()
-        return minbleps.link()
+        return minbleps
 
     @classmethod
     def create(cls, naiverate, outrate, scaleornone, cutoff = defaultcutoff, transition = defaulttransition):
-        return cls(naiverate, outrate, cls.resolvescale(naiverate, outrate, scaleornone), cutoff, transition).link()
+        return cls(naiverate, outrate, cls.resolvescale(naiverate, outrate, scaleornone), cutoff, transition)
 
     def __init__(self, naiverate, outrate, scale, cutoff, transition):
         log.debug('Creating minBLEPs.')
@@ -135,9 +135,5 @@ class MinBleps:
         naivex -= self.naiverate * shift
         return self.outx2minnaivex[outx] - naivex
 
-    def link(self):
-        self.pasteminbleps = pasteminbleps[X, self.mixinsize]
-        return self
-
     def paste(self, naivex, diffbuf, outbuf):
-        self.pasteminbleps(len(diffbuf), outbuf.buf, self.naivex2outx, len(outbuf), self.demultiplexed, self.naivex2off, diffbuf.buf, naivex, self.naiverate, self.outrate)
+        pasteminbleps(len(diffbuf), outbuf.buf, self.naivex2outx, len(outbuf), self.demultiplexed, self.naivex2off, diffbuf.buf, naivex, self.naiverate, self.outrate, self.mixinsize)
