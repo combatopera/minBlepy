@@ -1,4 +1,4 @@
-: Copyright 2014 Andrzej Cichocki
+: Copyright 2014, 2020 Andrzej Cichocki
 
 : This file is part of mynblep.
 :
@@ -16,7 +16,9 @@
 : along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
 
 pyversions += 3
-years += 2014
+years +=
+    2014
+    2020
 author = Andrzej Cichocki
 name = mynblep
 requires +=
