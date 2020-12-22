@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
 
+from . import atomic
 from .paste import pasteminbleps
 from .shapes import floatdtype
 from fractions import gcd
@@ -51,8 +52,7 @@ class MinBleps:
             log.debug("Cached minBLEPs loaded.")
         else:
             minbleps = cls(naiverate, outrate, scale, cutoff, transition)
-            path.parent.mkdir(exist_ok = True)
-            with path.open('wb') as f:
+            with atomic(path) as q, q.open('wb') as f:
                 pickle.dump(minbleps, f, pickle.HIGHEST_PROTOCOL)
         return minbleps
 
