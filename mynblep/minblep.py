@@ -18,7 +18,8 @@
 from .paste import pasteminbleps
 from .shapes import floatdtype
 from fractions import gcd
-import logging, numpy as np, os, pickle
+from pathlib import Path
+import logging, numpy as np, pickle
 
 log = logging.getLogger(__name__)
 
@@ -42,27 +43,17 @@ class MinBleps:
     @classmethod
     def loadorcreate(cls, naiverate, outrate, scaleornone, cutoff = defaultcutoff, transition = defaulttransition):
         scale = cls.resolvescale(naiverate, outrate, scaleornone)
-        name = "%s(%s)" % (cls.__name__, ','.join(map(repr, [naiverate, outrate, scale, cutoff, transition])))
-        path = os.path.join(os.path.dirname(__file__), name)
-        if os.path.exists(path):
+        path = Path.home() / '.mynblep' / f"{cls.__name__}({','.join(map(repr, [naiverate, outrate, scale, cutoff, transition]))})"
+        if path.exists():
             log.debug("Loading cached minBLEPs: %s", path)
-            f = open(path, 'rb')
-            try:
+            with path.open('rb') as f:
                 minbleps = pickle.load(f)
-            finally:
-                f.close()
             log.debug("Cached minBLEPs loaded.")
         else:
             minbleps = cls(naiverate, outrate, scale, cutoff, transition)
-            parent = os.path.dirname(path)
-            if not os.path.exists(parent):
-                os.makedirs(parent)
-            f = open(path, 'wb')
-            try:
+            path.parent.mkdir(exist_ok = True)
+            with path.open('wb') as f:
                 pickle.dump(minbleps, f, pickle.HIGHEST_PROTOCOL)
-                f.flush()
-            finally:
-                f.close()
         return minbleps
 
     @classmethod
