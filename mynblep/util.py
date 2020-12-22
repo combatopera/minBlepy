@@ -15,3 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
 
+from contextlib import contextmanager
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+@contextmanager
+def atomic(path):
+    path.parent.mkdir(parents = True, exist_ok = True)
+    with TemporaryDirectory(dir = path.parent) as d:
+        q = Path(d, path.name)
+        yield q
+        q.rename(path)

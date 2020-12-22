@@ -15,9 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
 
-from . import atomic
 from .paste import pasteminbleps
 from .shapes import floatdtype
+from .util import atomic
 from fractions import gcd
 from pathlib import Path
 import logging, numpy as np, pickle

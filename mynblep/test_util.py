@@ -15,3 +15,19 @@
 # You should have received a copy of the GNU General Public License
 # along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
 
+from .util import atomic
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest import TestCase
+
+class TestAtomic(TestCase):
+
+    def test_works(self):
+        for relpath in ['x'], ['x', 'y'], ['x', 'y', 'z']:
+            with TemporaryDirectory() as d:
+                p = Path(d, *relpath)
+                for _ in range(2):
+                    with atomic(p) as q, q.open('w') as f:
+                        print('doc', file = f)
+                    self.assertFalse(q.exists())
+                    self.assertEqual('doc\n', p.read_text())
