@@ -31,3 +31,13 @@ class TestAtomic(TestCase):
                         print('doc', file = f)
                     self.assertFalse(q.exists())
                     self.assertEqual('doc\n', p.read_text())
+
+    def test_fail(self):
+        class X(Exception): pass
+        with TemporaryDirectory() as d:
+            p = Path(d, 'x')
+            with self.assertRaises(X), atomic(p) as q, q.open('w') as f:
+                print('doc', file = f)
+                raise X
+            self.assertFalse(q.exists())
+            self.assertFalse(p.exists())
