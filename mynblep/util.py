@@ -23,6 +23,6 @@ from tempfile import TemporaryDirectory
 def atomic(path):
     path.parent.mkdir(parents = True, exist_ok = True)
     with TemporaryDirectory(dir = path.parent) as d:
-        q = Path(d, path.name)
+        q = Path(d, f"{path.name}.part")
         yield q
         q.rename(path)
