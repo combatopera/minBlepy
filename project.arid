@@ -22,6 +22,7 @@ years +=
 author = Andrzej Cichocki
 name = mynblep
 requires +=
+    lagoon>=21
     numpy>=1.19.1
     pyrbo>=5
 warmups += mynblep.warmup:warmup

@@ -17,8 +17,8 @@
 
 from .paste import pasteminbleps
 from .shapes import floatdtype
-from .util import atomic
 from fractions import gcd
+from lagoon.util import atomic
 from pathlib import Path
 import logging, numpy as np, pickle
 
