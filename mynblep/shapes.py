@@ -1,4 +1,4 @@
-# Copyright 2014, 2020 Andrzej Cichocki
+# Copyright 2014, 2020 Andrzej Cichocki and contributors
 
 # This file is part of mynblep.
 #

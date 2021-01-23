@@ -1,4 +1,4 @@
-: Copyright 2014, 2020 Andrzej Cichocki
+: Copyright 2014, 2020 Andrzej Cichocki and contributors
 
 : This file is part of mynblep.
 :
@@ -19,7 +19,7 @@ pyversions += 3
 years +=
     2014
     2020
-author = Andrzej Cichocki
+author = Andrzej Cichocki and contributors
 name = mynblep
 requires +=
     lagoon>=21
