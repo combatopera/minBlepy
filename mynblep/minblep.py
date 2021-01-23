@@ -17,7 +17,11 @@
 
 from .paste import pasteminbleps
 from .shapes import floatdtype
-from fractions import gcd
+try:
+    from fractions import gcd
+except ImportError:
+    # python >= 3.9
+    from math import gcd
 from lagoon.util import atomic
 from pathlib import Path
 import logging, numpy as np, pickle
