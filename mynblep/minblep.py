@@ -48,7 +48,7 @@ class MinBleps:
     @classmethod
     def loadorcreate(cls, naiverate, outrate, scaleornone, cutoff = defaultcutoff, transition = defaulttransition):
         scale = cls.resolvescale(naiverate, outrate, scaleornone)
-        path = Path.home() / '.mynblep' / f"{cls.__name__}({','.join(map(repr, [naiverate, outrate, scale, cutoff, transition]))})"
+        path = Path.home() / '.cache' / 'mynblep' / f"{cls.__name__}({','.join(map(repr, [naiverate, outrate, scale, cutoff, transition]))})"
         if path.exists():
             log.debug("Loading cached minBLEPs: %s", path)
             with path.open('rb') as f:
