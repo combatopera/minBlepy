@@ -1,19 +1,19 @@
 # Copyright 2014, 2020 Andrzej Cichocki and contributors
 
-# This file is part of mynblep.
+# This file is part of minBlepy.
 #
-# mynblep is free software: you can redistribute it and/or modify
+# minBlepy is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# mynblep is distributed in the hope that it will be useful,
+# minBlepy is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with mynblep.  If not, see <http://www.gnu.org/licenses/>.
+# along with minBlepy.  If not, see <http://www.gnu.org/licenses/>.
 
 from .paste import pasteminbleps
 from .shapes import floatdtype
@@ -48,7 +48,7 @@ class MinBleps:
     @classmethod
     def loadorcreate(cls, naiverate, outrate, scaleornone, cutoff = defaultcutoff, transition = defaulttransition):
         scale = cls.resolvescale(naiverate, outrate, scaleornone)
-        path = Path.home() / '.cache' / 'mynblep' / f"{cls.__name__}({','.join(map(repr, [naiverate, outrate, scale, cutoff, transition]))})"
+        path = Path.home() / '.cache' / 'minBlepy' / f"{cls.__name__}({','.join(map(repr, [naiverate, outrate, scale, cutoff, transition]))})"
         if path.exists():
             log.debug("Loading cached minBLEPs: %s", path)
             with path.open('rb') as f:
