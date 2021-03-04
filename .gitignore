@@ -1,9 +1,8 @@
 #gclean
 *.pyc
 *_turbo/
-/mynblep/MinBleps(*)
 /build/
-/mynblep.egg-info/
+/minBlepy.egg-info/
 /dist/
 /setup.py
 /setup.cfg
