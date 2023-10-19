@@ -108,7 +108,7 @@ class MinBleps:
             self.demultiplexed[i * self.mixinsize:(i + 1) * self.mixinsize] = self.minblep[i::scale]
         self.naivex2off = self.naivex2shape * self.mixinsize
         self.outx2minnaivex = np.empty(outrate, dtype = self.naivex2outx.dtype)
-        for naivex in range(naiverate - 1, -1, -1):
+        for naivex in range(naiverate)[::-1]:
             self.outx2minnaivex[self.naivex2outx[naivex]] = naivex
         log.debug('%s minBLEPs created.', scale)
         self.naiverate = naiverate
