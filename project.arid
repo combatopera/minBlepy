@@ -15,18 +15,21 @@
 : You should have received a copy of the GNU General Public License
 : along with minBlepy.  If not, see <http://www.gnu.org/licenses/>.
 
-pyversions += 3
-years +=
-    2014
-    2020
 author = Andrzej Cichocki and contributors
-name = minBlepy
-requires +=
-    lagoon>=21
-    numpy>=1.19.1
-    pyrbo>=5
-warmups += minBlepy.warmup:warmup
 build requires +=
     Cython
     numpy
 buildbot enabled = true
+github account = combatopera
+name = minBlepy
+pypi account = combatopera
+pyversions += 3
+requires +=
+    lagoon>=21
+    numpy>=1.19.1
+    pyrbo>=5
+tagline = MinBLEPs library including fast naive waveform conversion
+warmups += minBlepy.warmup:warmup
+years +=
+    2014
+    2020
