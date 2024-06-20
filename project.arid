@@ -22,6 +22,7 @@ build requires +=
 buildbot enabled = true
 github account = combatopera
 name = minBlepy
+native = true
 pypi account = combatopera
 pyversions += 3
 requires +=
