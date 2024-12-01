@@ -21,8 +21,14 @@ build requires +=
     numpy==$(numpy_build_version)
 buildbot enabled = true
 github account = combatopera
+internal_module +=
+    minBlepy
+    minBlepy.const
+    minBlepy.paste
+    minBlepy.paste_turbo
+    minBlepy.shapes
+    minBlepy.warmup
 name = minBlepy
-pydoc_enabled = false
 pypi account = combatopera
 pyversions += 3
 requires +=

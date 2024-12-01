@@ -18,3 +18,10 @@ venvname/bin/pip install -U pip
 venvname/bin/pip install minBlepy
 . venvname/bin/activate
 ```
+
+## API
+
+<a id="minBlepy.minblep"></a>
+
+### minBlepy.minblep
+
