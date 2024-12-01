@@ -18,17 +18,16 @@
 author = Andrzej Cichocki and contributors
 build requires +=
     Cython==3.0.11
-    numpy==$(numpy_version)
+    numpy==$(numpy_build_version)
 buildbot enabled = true
 github account = combatopera
 name = minBlepy
-numpy_version = 2.1.3
 pydoc_enabled = false
 pypi account = combatopera
 pyversions += 3
 requires +=
     lagoon>=21
-    numpy>=$(numpy_version)
+    numpy>=$(numpy_build_version)
     pyrbo>=5
 tagline = MinBLEPs library including fast naive waveform conversion
 warmups += minBlepy.warmup:warmup
