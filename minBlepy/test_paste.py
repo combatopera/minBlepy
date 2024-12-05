@@ -22,20 +22,20 @@ import numpy as np
 
 class TestPaste(TestCase):
 
-    def _works(self, outrate):
+    def _nocrash(self, outrate):
         naiverate = 250000
         minbleps = MinBleps.create(naiverate, outrate, None)
-        overflowsize = minbleps.mixinsize
+        overflowsize = minbleps.mixinsize # XXX: Why?
         translator = Translator(naiverate, minbleps)
         for framecount in range(50, 200):
-            diffbuf = np.empty(framecount, dtype = floatdtype)
+            diffbuf = np.empty(framecount, dtype = floatdtype) # TODO: Determinism.
             naivex, outcount = translator.step(framecount)
             outsize = outcount + overflowsize
             outbuf = np.empty(outsize, dtype = floatdtype)
             minbleps.paste(naivex, diffbuf, outbuf)
 
-    def test_44100(self):
-        self._works(44100)
+    def test_nocrash44100(self):
+        self._nocrash(44100)
 
-    def test_48000(self):
-        self._works(48000)
+    def test_nocrash48000(self):
+        self._nocrash(48000)
