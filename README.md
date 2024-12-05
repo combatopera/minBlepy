@@ -31,12 +31,6 @@ venvname/bin/pip install minBlepy
 
 Common data type of naive values and digital audio sample points, effectively about 24 bits.
 
-<a id="minBlepy.u4"></a>
-
-###### u4
-
-Abbreviation for np.uint32.
-
 <a id="minBlepy.minblep"></a>
 
 ### minBlepy.minblep

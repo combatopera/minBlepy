@@ -20,4 +20,3 @@ import numpy as np
 floatdtype = np.float32
 'Common data type of naive values and digital audio sample points, effectively about 24 bits.'
 u4 = np.uint32
-'Abbreviation for np.uint32.'
