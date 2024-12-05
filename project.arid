@@ -31,7 +31,7 @@ pyversions += 3
 requires +=
     lagoon>=21
     numpy>=$(numpy_build_version)
-    pyrbo>=5
+    pyrbo>=13
 tagline = MinBLEPs library including fast naive waveform conversion
 test requires += Cython==$(cython_build_version)
 warmups += minBlepy.warmup:warmup
