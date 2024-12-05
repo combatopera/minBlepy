@@ -36,14 +36,20 @@ class Translator:
 
 class TestPaste(TestCase):
 
-    def test_works(self):
+    def _works(self, outrate):
         naiverate = 250000
-        minbleps = MinBleps.create(naiverate, 44100, None)
+        minbleps = MinBleps.create(naiverate, outrate, None)
         overflowsize = minbleps.mixinsize
         translator = Translator(naiverate, minbleps)
-        framecount = 100
-        diffbuf = np.empty(framecount, dtype = floatdtype)
-        naivex, outcount = translator.step(framecount)
-        outsize = outcount + overflowsize
-        outbuf = np.empty(outsize, dtype = floatdtype)
-        minbleps.paste(naivex, diffbuf, outbuf)
+        for framecount in range(50, 200):
+            diffbuf = np.empty(framecount, dtype = floatdtype)
+            naivex, outcount = translator.step(framecount)
+            outsize = outcount + overflowsize
+            outbuf = np.empty(outsize, dtype = floatdtype)
+            minbleps.paste(naivex, diffbuf, outbuf)
+
+    def test_44100(self):
+        self._works(44100)
+
+    def test_48000(self):
+        self._works(48000)
