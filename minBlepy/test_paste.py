@@ -16,23 +16,9 @@
 # along with minBlepy.  If not, see <http://www.gnu.org/licenses/>.
 
 from . import floatdtype
-from .minblep import MinBleps
+from .minblep import MinBleps, Translator
 from unittest import TestCase
 import numpy as np
-
-class Translator:
-
-    naivex = 0
-
-    def __init__(self, naiverate, minbleps):
-        self.naiverate = naiverate
-        self.minbleps = minbleps
-
-    def step(self, framecount):
-        naivex = self.naivex
-        outcount = self.minbleps.getoutcount(naivex, framecount)
-        self.naivex = (naivex + framecount) % self.naiverate
-        return naivex, outcount
 
 class TestPaste(TestCase):
 

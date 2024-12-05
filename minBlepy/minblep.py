@@ -136,3 +136,17 @@ class MinBleps:
         The `naivex` is the index of the first naive value, modulo `naiverate`.
         The `outbuf` must have enough space for overflow of the last possible minBLEP, and should be initialised to the overflow section of the previous `outbuf` and otherwise zero.'''
         pasteminbleps(len(diffbuf), outbuf, self.naivex2outx, len(outbuf), self.demultiplexed, self.naivex2off, diffbuf, naivex, self.naiverate, self.outrate, self.mixinsize)
+
+class Translator:
+
+    naivex = 0
+
+    def __init__(self, naiverate, minbleps):
+        self.naiverate = naiverate
+        self.minbleps = minbleps
+
+    def step(self, framecount):
+        naivex = self.naivex
+        outcount = self.minbleps.getoutcount(naivex, framecount)
+        self.naivex = (naivex + framecount) % self.naiverate
+        return naivex, outcount
