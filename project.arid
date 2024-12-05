@@ -22,7 +22,6 @@ build requires +=
 buildbot enabled = true
 github account = combatopera
 internal_module +=
-    minBlepy.const
     minBlepy.paste
     minBlepy.paste_turbo
     minBlepy.warmup
