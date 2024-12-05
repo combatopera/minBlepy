@@ -15,3 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with minBlepy.  If not, see <http://www.gnu.org/licenses/>.
 
+import numpy as np
+
+floatdtype = np.float32
+'Common data type of naive values and digital audio sample points, effectively about 24 bits.'

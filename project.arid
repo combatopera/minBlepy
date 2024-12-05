@@ -22,11 +22,9 @@ build requires +=
 buildbot enabled = true
 github account = combatopera
 internal_module +=
-    minBlepy
     minBlepy.const
     minBlepy.paste
     minBlepy.paste_turbo
-    minBlepy.shapes
     minBlepy.warmup
 name = minBlepy
 pypi account = combatopera

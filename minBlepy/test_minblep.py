@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with minBlepy.  If not, see <http://www.gnu.org/licenses/>.
 
+from . import floatdtype
 from .minblep import MinBleps
-from .shapes import floatdtype
 from collections import namedtuple
 from unittest import TestCase
 import numpy as np

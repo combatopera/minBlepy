@@ -21,6 +21,16 @@ venvname/bin/pip install minBlepy
 
 ## API
 
+<a id="minBlepy"></a>
+
+### minBlepy
+
+<a id="minBlepy.floatdtype"></a>
+
+###### floatdtype
+
+Common data type of naive values and digital audio sample points, effectively about 24 bits.
+
 <a id="minBlepy.minblep"></a>
 
 ### minBlepy.minblep
