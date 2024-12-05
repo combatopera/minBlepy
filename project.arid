@@ -16,6 +16,7 @@
 : along with minBlepy.  If not, see <http://www.gnu.org/licenses/>.
 
 author = Andrzej Cichocki and contributors
+author_email = 3613868+combatopera@users.noreply.github.com
 build requires +=
     Cython==$(cython_build_version)
     numpy==$(numpy_build_version)
