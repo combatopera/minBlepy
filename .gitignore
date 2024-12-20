@@ -2,7 +2,9 @@
 *.pyc
 *_turbo/
 /build/
-/minBlepy.egg-info/
+minBlepy.egg-info/*
+!minBlepy.egg-info/PKG-INFO
+!minBlepy.egg-info/requires.txt
 /dist/
 /setup.py
 /setup.cfg
