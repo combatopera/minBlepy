@@ -28,7 +28,6 @@ internal_module +=
     minBlepy.warmup
 name = minBlepy
 pypi account = combatopera
-pyversions += 3
 requires +=
     lagoon>=21
     numpy>=$(numpy_build_version)
