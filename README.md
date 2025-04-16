@@ -1,5 +1,5 @@
 # minBlepy
-MinBLEPs library including fast naive waveform conversion
+MinBLEPs library including fast naive waveform conversion.
 
 ## Install
 These are generic installation instructions.

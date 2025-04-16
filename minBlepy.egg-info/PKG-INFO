@@ -12,7 +12,7 @@ Requires-Dist: numpy>=2.0.2
 Requires-Dist: pyrbo>=13
 
 # minBlepy
-MinBLEPs library including fast naive waveform conversion
+MinBLEPs library including fast naive waveform conversion.
 
 ## Install
 These are generic installation instructions.
