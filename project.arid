@@ -31,7 +31,7 @@ pypi account = combatopera
 requires +=
     lagoon>=21
     numpy>=$(numpy_build_version)
-    pyrbo>=13
+    pyrbo>=19
 tagline = MinBLEPs library including fast naive waveform conversion
 test requires += Cython==$(cython_build_version)
 warmups += minBlepy.warmup:warmup
