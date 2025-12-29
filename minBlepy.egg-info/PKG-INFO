@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.2
 Name: minBlepy
 Version: 20.dev0
 Summary: MinBLEPs library including fast naive waveform conversion
@@ -10,6 +10,13 @@ License-File: COPYING
 Requires-Dist: lagoon>=21
 Requires-Dist: numpy>=2.0.2
 Requires-Dist: pyrbo>=19
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: summary
 
 # minBlepy
 MinBLEPs library including fast naive waveform conversion.
