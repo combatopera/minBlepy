@@ -8,7 +8,7 @@ Author-email: 3613868+combatopera@users.noreply.github.com
 Description-Content-Type: text/markdown
 License-File: COPYING
 Requires-Dist: lagoon>=21
-Requires-Dist: numpy>=2.0.2
+Requires-Dist: numpy>=2.2.6
 Requires-Dist: pyrbo>=19
 Dynamic: author
 Dynamic: author-email
