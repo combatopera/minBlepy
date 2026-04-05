@@ -19,7 +19,7 @@ author = Andrzej Cichocki and contributors
 author_email = 3613868+combatopera@users.noreply.github.com
 build requires +=
     Cython==$(cython_build_version)
-    numpy==$(numpy_build_version)
+    $*$(numpy build_requires)
 buildbot enabled = true
 github account = combatopera
 internal_module +=
@@ -30,7 +30,7 @@ name = minBlepy
 pypi account = combatopera
 requires +=
     lagoon>=21
-    numpy>=$(numpy_build_version)
+    $(numpy lower_bound)
     pyrbo>=19
 tagline = MinBLEPs library including fast naive waveform conversion
 test requires += Cython==$(cython_build_version)
