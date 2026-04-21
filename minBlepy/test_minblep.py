@@ -1,4 +1,4 @@
-# Copyright 2014, 2020 Andrzej Cichocki and contributors
+# Copyright 2014, 2020, 2026 Andrzej Cichocki and contributors
 
 # This file is part of minBlepy.
 #
