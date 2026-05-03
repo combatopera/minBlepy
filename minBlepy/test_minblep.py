@@ -24,18 +24,24 @@ import numpy as np
 class TestMinBleps(TestCase):
 
     def test_minphasereconstruction(self):
-        minbleps = MinBleps.create(MinBleps.Params(500, 1, 500))
+        params = MinBleps.Params(500, 1)
+        self.assertEqual(500, params.scale)
+        minbleps = MinBleps.create(params)
         absdft = np.abs(np.fft.fft(minbleps.bli))
         absdft2 = np.abs(np.fft.fft(minbleps.minbli))
         self.assertTrue(np.allclose(absdft, absdft2))
 
     def test_types(self):
-        minbleps = MinBleps.create(MinBleps.Params(500, 1, 500))
+        params = MinBleps.Params(500, 1)
+        self.assertEqual(500, params.scale)
+        minbleps = MinBleps.create(params)
         self.assertEqual(floatdtype, minbleps.minblep.dtype)
 
     def test_xform(self):
         ctrlrate, outrate, scale = 10, 6, 5
-        minbleps = MinBleps.create(MinBleps.Params(ctrlrate, outrate, scale))
+        params = MinBleps.Params(ctrlrate, outrate)
+        self.assertEqual(scale, params.scale)
+        minbleps = MinBleps.create(params)
         mixins = []
         MixinInfo = namedtuple('MixinInfo', 'outi shape data')
         for x in range(ctrlrate * 2):
@@ -47,7 +53,9 @@ class TestMinBleps(TestCase):
         self.assertEqual([4, 1, 3, 0, 2] * 4, [m.shape for m in mixins])
 
     def test_counts(self):
-        mb = MinBleps.create(MinBleps.Params(10, 6, 5))
+        params = MinBleps.Params(10, 6)
+        self.assertEqual(5, params.scale)
+        mb = MinBleps.create(params)
         self.assertEqual([0, 0, 1, 1, 2, 3, 3, 4, 4, 5], [mb.getoutcount(0, n) for n in range(10)])
         self.assertEqual([0, 1, 1, 2, 3, 3, 4, 4, 5, 6], [mb.getoutcount(1, n) for n in range(10)])
         self.assertEqual([0, 0, 1, 2, 2, 3, 3, 4, 5, 5], [mb.getoutcount(2, n) for n in range(10)])

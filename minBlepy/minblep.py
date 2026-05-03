@@ -34,12 +34,12 @@ class MinBleps:
 
     class Params:
 
-        def __init__(self, naiverate, outrate, scaleornone, cutoff = .475, transition = .05):
+        def __init__(self, naiverate, outrate, cutoff = .475, transition = .05):
             self.naiverate = naiverate
             self.outrate = outrate
             self.scale = idealscale = naiverate // gcd(naiverate, outrate)
-            if scaleornone is not None and scaleornone != idealscale:
-                raise Exception("Expected scale %s but ideal is %s." % (scaleornone, idealscale))
+            if idealscale > 10000:
+                log.warning("That's a lot of minBLEPs: %s", idealscale)
             self.cutoff = cutoff
             self.transition = transition
 
