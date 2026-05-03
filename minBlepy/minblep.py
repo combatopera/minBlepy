@@ -28,7 +28,7 @@ class MinBleps:
 
     defaultcutoff = .475
     defaulttransition = .05
-    minmag = np.exp(-100)
+    logbias = -100
 
     @staticmethod
     def round(v):
@@ -81,12 +81,13 @@ class MinBleps:
         # Everything is real after we discard the phase info here:
         absdft = np.abs(np.fft.fft(self.bli))
         # The "real cepstrum" is symmetric apart from its first element:
-        realcepstrum = np.fft.ifft(np.log(np.maximum(self.minmag, absdft)))
+        bias = np.exp(self.logbias)
+        realcepstrum = np.fft.ifft(np.log(bias + absdft))
         # Leave first point, zero max phase part, double min phase part to compensate.
         # The midpoint is shared between parts so it doesn't change:
         realcepstrum[1:midpoint] *= 2
         realcepstrum[midpoint + 1:] = 0
-        self.minbli = np.fft.ifft(np.exp(np.fft.fft(realcepstrum))).real
+        self.minbli = np.fft.ifft(np.exp(np.fft.fft(realcepstrum)) - bias).real
         self.minblep = np.cumsum(self.minbli, dtype = floatdtype)
         # Prepend zeros to simplify naivex2outx calc:
         self.minblep = np.append(np.zeros(scale - 1, floatdtype), self.minblep)
