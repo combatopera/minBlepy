@@ -16,7 +16,7 @@
 # along with minBlepy.  If not, see <http://www.gnu.org/licenses/>.
 
 from . import floatdtype
-from .minblep import MinBleps
+from .minblep import MinBleps, Solution
 from collections import namedtuple
 from unittest import TestCase
 import numpy as np
@@ -27,36 +27,38 @@ class TestParams(TestCase):
         self.assertEqual(.475, MinBleps.Params(9000, 8000, .05).cutoff)
         self.assertEqual(.45, MinBleps.Params(9000, 8000, .1).cutoff)
 
-class TestMinBleps(TestCase):
+class TestSolution(TestCase):
 
     def test_minphasereconstruction(self):
         params = MinBleps.Params(500, 1)
         self.assertEqual(500, params.scale)
-        minbleps = MinBleps.create(params)
-        absdft = np.abs(np.fft.fft(minbleps.bli))
-        absdft2 = np.abs(np.fft.fft(minbleps.minbli))
+        solution = Solution(params)
+        absdft = np.abs(np.fft.fft(solution.bli))
+        absdft2 = np.abs(np.fft.fft(solution.minbli))
         self.assertTrue(np.allclose(absdft, absdft2))
 
     def test_types(self):
         params = MinBleps.Params(500, 1)
         self.assertEqual(500, params.scale)
-        minbleps = MinBleps.create(params)
-        self.assertEqual(floatdtype, minbleps.minblep.dtype)
+        solution = Solution(params)
+        self.assertEqual(floatdtype, solution.minblep.dtype)
 
     def test_xform(self):
         ctrlrate, outrate, scale = 10, 6, 5
         params = MinBleps.Params(ctrlrate, outrate)
         self.assertEqual(scale, params.scale)
-        minbleps = MinBleps.create(params)
+        solution = Solution(params)
         mixins = []
         MixinInfo = namedtuple('MixinInfo', 'outi shape data')
         for x in range(ctrlrate * 2):
-            outi = minbleps.naivex2outx[x % ctrlrate]
-            shape = minbleps.naivex2shape[x % ctrlrate]
-            data = minbleps.minblep[shape::scale]
+            outi = solution.naivex2outx[x % ctrlrate]
+            shape = solution.naivex2shape[x % ctrlrate]
+            data = solution.minblep[shape::scale]
             mixins.append(MixinInfo(outi, shape, data))
         self.assertEqual([0, 0, 1, 1, 2, 3, 3, 4, 4, 5] * 2, [m.outi for m in mixins])
         self.assertEqual([4, 1, 3, 0, 2] * 4, [m.shape for m in mixins])
+
+class TestMinBleps(TestCase):
 
     def test_counts(self):
         params = MinBleps.Params(10, 6)
