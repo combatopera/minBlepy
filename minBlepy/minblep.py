@@ -60,6 +60,10 @@ class MinBleps:
     def create(cls, naiverate, outrate, scaleornone, cutoff = defaultcutoff, transition = defaulttransition):
         return cls(naiverate, outrate, cls.resolvescale(naiverate, outrate, scaleornone), cutoff, transition)
 
+    @property
+    def overflowsize(self):
+        return self.mixinsize # TODO: Explain how a whole mixin can overflow.
+
     def __init__(self, naiverate, outrate, scale, cutoff, transition):
         log.debug('Creating minBLEPs.')
         # XXX: Use kaiser and/or satisfy min transition?
