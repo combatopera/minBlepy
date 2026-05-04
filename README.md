@@ -68,3 +68,7 @@ The first element of `diffbuf` should be the first naive value in the current bl
 The `naivex` is the index of the first naive value, modulo `naiverate`.
 The `outbuf` must have enough space for overflow of the last possible minBLEP, and should be initialised to the overflow section of the previous `outbuf` and otherwise zero.
 
+<a id="minBlepy.signal"></a>
+
+### minBlepy.signal
+

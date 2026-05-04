@@ -25,6 +25,7 @@ github account = combatopera
 internal_module +=
     minBlepy.paste
     minBlepy.paste_turbo
+    minBlepy.signal_turbo
     minBlepy.warmup
 name = minBlepy
 pypi account = combatopera
