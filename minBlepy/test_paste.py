@@ -24,7 +24,7 @@ class TestPaste(TestCase):
 
     def _nocrash(self, outrate):
         naiverate = 250000
-        minbleps = MinBleps.create(naiverate, outrate, None)
+        minbleps = MinBleps.create(MinBleps.Params(naiverate, outrate, None))
         overflowsize = minbleps.overflowsize
         translator = Translator(naiverate, minbleps)
         for framecount in range(50, 200):

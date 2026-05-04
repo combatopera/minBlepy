@@ -26,39 +26,43 @@ log = logging.getLogger(__name__)
 
 class MinBleps:
 
-    defaultcutoff = .475
-    defaulttransition = .05
     logbias = -100
 
     @staticmethod
     def round(v):
         return np.int32(v + .5)
 
-    @staticmethod
-    def resolvescale(naiverate, outrate, scaleornone):
-        idealscale = naiverate // gcd(naiverate, outrate)
-        if scaleornone is not None and scaleornone != idealscale:
-            raise Exception("Expected scale %s but ideal is %s." % (scaleornone, idealscale))
-        return idealscale
+    class Params:
+
+        def __init__(self, naiverate, outrate, scaleornone, cutoff = .475, transition = .05):
+            self.naiverate = naiverate
+            self.outrate = outrate
+            self.scale = idealscale = naiverate // gcd(naiverate, outrate)
+            if scaleornone is not None and scaleornone != idealscale:
+                raise Exception("Expected scale %s but ideal is %s." % (scaleornone, idealscale))
+            self.cutoff = cutoff
+            self.transition = transition
+
+        def cachekey(self):
+            return ','.join(f"{name}={getattr(self, name)!r}" for name in ['naiverate', 'outrate', 'scale', 'cutoff', 'transition'])
 
     @classmethod
-    def loadorcreate(cls, naiverate, outrate, scaleornone, cutoff = defaultcutoff, transition = defaulttransition):
-        scale = cls.resolvescale(naiverate, outrate, scaleornone)
-        path = Path.home() / '.cache' / 'minBlepy' / f"{cls.__name__}({','.join(map(repr, [naiverate, outrate, scale, cutoff, transition]))})"
+    def loadorcreate(cls, params):
+        path = Path.home() / '.cache' / 'minBlepy' / params.cachekey()
         if path.exists():
             log.debug("Loading cached minBLEPs: %s", path)
             with path.open('rb') as f:
                 minbleps = pickle.load(f)
             log.debug("Cached minBLEPs loaded.")
         else:
-            minbleps = cls(naiverate, outrate, scale, cutoff, transition)
+            minbleps = cls.create(params)
             with atomic(path) as q, q.open('wb') as f:
                 pickle.dump(minbleps, f, pickle.HIGHEST_PROTOCOL)
         return minbleps
 
     @classmethod
-    def create(cls, naiverate, outrate, scaleornone, cutoff = defaultcutoff, transition = defaulttransition):
-        return cls(naiverate, outrate, cls.resolvescale(naiverate, outrate, scaleornone), cutoff, transition)
+    def create(cls, params):
+        return cls(params.naiverate, params.outrate, params.scale, params.cutoff, params.transition)
 
     @property
     def overflowsize(self):
