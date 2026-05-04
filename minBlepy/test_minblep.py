@@ -21,6 +21,12 @@ from collections import namedtuple
 from unittest import TestCase
 import numpy as np
 
+class TestParams(TestCase):
+
+    def test_defaultcutoff(self):
+        self.assertEqual(.475, MinBleps.Params(9000, 8000, .05).cutoff)
+        self.assertEqual(.45, MinBleps.Params(9000, 8000, .1).cutoff)
+
 class TestMinBleps(TestCase):
 
     def test_minphasereconstruction(self):

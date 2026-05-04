@@ -34,17 +34,17 @@ class MinBleps:
 
     class Params:
 
-        def __init__(self, naiverate, outrate, cutoff = .475, transition = .05):
+        def __init__(self, naiverate, outrate, transition = .05):
             self.naiverate = naiverate
             self.outrate = outrate
             self.scale = idealscale = naiverate // gcd(naiverate, outrate)
             if idealscale > 10000:
                 log.warning("That's a lot of minBLEPs: %s", idealscale)
-            self.cutoff = cutoff
             self.transition = transition
+            self.cutoff = .5 - transition / 2
 
         def cachekey(self):
-            return ','.join(f"{name}={getattr(self, name)!r}" for name in ['naiverate', 'outrate', 'scale', 'cutoff', 'transition'])
+            return ','.join(f"{name}={getattr(self, name)!r}" for name in ['naiverate', 'outrate', 'scale', 'transition', 'cutoff'])
 
     @classmethod
     def loadorcreate(cls, params):
