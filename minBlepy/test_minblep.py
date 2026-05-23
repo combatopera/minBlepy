@@ -27,6 +27,9 @@ class TestParams(TestCase):
         self.assertEqual(.475, MinBleps.Params(9000, 8000, .05).cutoff)
         self.assertEqual(.45, MinBleps.Params(9000, 8000, .1).cutoff)
 
+    def test_passband(self):
+        self.assertEqual(8000, MinBleps.Params(123456, 20000, .1).passband())
+
 class TestSolution(TestCase):
 
     def test_minphasereconstruction(self):
