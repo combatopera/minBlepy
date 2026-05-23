@@ -94,6 +94,9 @@ class MinBleps:
             self.transition = transition
             self.cutoff = .5 - transition / 2
 
+        def passband(self):
+            return self.outrate * (self.cutoff - self.transition / 2)
+
         def cachekey(self):
             return ','.join(f"{name}={getattr(self, name)!r}" for name in ['naiverate', 'outrate', 'scale', 'transition', 'cutoff'])
 

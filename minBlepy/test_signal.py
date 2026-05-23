@@ -16,7 +16,9 @@
 # along with minBlepy.  If not, see <http://www.gnu.org/licenses/>.
 
 from . import floatdtype
-from .signal import Osc
+from .minblep import MinBleps
+from .signal import Osc, PCMSignal
+from collections import defaultdict
 from unittest import TestCase
 import numpy as np
 
@@ -40,3 +42,37 @@ class TestOsc(TestCase):
         osc.scale = 1
         osc(v)
         self.assertEqual([2, 3, 1, 2, 3], list(v))
+
+class TestPCMSignal(TestCase):
+
+    def test_spectrum(self):
+        p = MinBleps.Params(100000, 8000)
+        self.assertEqual(25, p.scale)
+        square = Osc(np.array([1, -1], dtype = floatdtype))
+        square.scale = 200
+        tone = p.naiverate / (square.scale * len(square.shape))
+        self.assertEqual(250, tone)
+        mb = MinBleps.create(p)
+        signal = PCMSignal(mb, square)
+        nyq = 4096
+        size = nyq * 2
+        v = np.empty(size, dtype = floatdtype)
+        signal(v[:1000])
+        for i in range(1000, 2000, 5):
+            signal(v[i:i + 5])
+        signal(v[2000:])
+        spectrum = np.abs(np.fft.fft(v * np.hanning(size), norm = "forward"))
+        spectrum[1:nyq] += spectrum[size:nyq:-1]
+        spectrum = spectrum[:nyq + 1]
+        amp = defaultdict(lambda: 0)
+        for i in range(1, nyq + 1):
+            a = spectrum[i]
+            if 20 * np.log10(a) > -90:
+                f = i / size * p.outrate
+                h = round(f / tone)
+                self.assertEqual(1, h % 2)
+                self.assertLess(abs(tone * h - f), 1)
+                amp[h] += a
+        for h, a in amp.items():
+            if tone * h <= p.passband():
+                self.assertLess(abs(amp[1] / h - a), .004)

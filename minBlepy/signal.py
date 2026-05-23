@@ -15,8 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with minBlepy.  If not, see <http://www.gnu.org/licenses/>.
 
-from . import u4
+from . import floatdtype, u4
 from pyrbo import LOCAL, T, turbo
+import numpy as np
 
 class Osc:
 
@@ -42,3 +43,29 @@ class Osc:
             vlen -= 1
             self_count += 1
         return self_index, self_count
+
+class PCMSignal:
+
+    dc = 0
+    naivex = 0
+
+    def __init__(self, minbleps, naivesignal):
+        self.carry = np.zeros(minbleps.overflowsize, dtype = floatdtype)
+        self.minbleps = minbleps
+        self.naivesignal = naivesignal
+
+    def __call__(self, v):
+        naiven = self.minbleps.getminnaiven(self.naivex, len(v))
+        u = np.empty(naiven, dtype = floatdtype)
+        self.naivesignal(u)
+        d = u.copy()
+        d[0] -= self.dc
+        d[1:] -= u[:-1]
+        w = np.empty(len(v) + len(self.carry), dtype = floatdtype)
+        w[:len(self.carry)] = self.carry
+        w[len(self.carry):] = self.dc
+        self.minbleps.paste(self.naivex, d, w)
+        v[:] = w[:len(v)]
+        self.carry[:] = w[len(v):]
+        self.dc = u[-1]
+        self.naivex = (self.naivex + naiven) % self.minbleps.naiverate
