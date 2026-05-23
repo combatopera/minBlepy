@@ -26,8 +26,6 @@ log = logging.getLogger(__name__)
 
 class Solution:
 
-    logbias = -100
-
     @staticmethod
     def round(v):
         return np.int32(v + .5)
@@ -53,7 +51,7 @@ class Solution:
         # Everything is real after we discard the phase info here:
         absdft = np.abs(np.fft.fft(self.bli))
         # The "real cepstrum" is symmetric apart from its first element:
-        bias = np.exp(self.logbias)
+        bias = np.exp(p.logbias)
         realcepstrum = np.fft.ifft(np.log(bias + absdft))
         # Leave first point, zero max phase part, double min phase part to compensate.
         # The midpoint is shared between parts so it doesn't change:
@@ -84,6 +82,8 @@ class Solution:
 class MinBleps:
 
     class Params:
+
+        logbias = -100
 
         def __init__(self, naiverate, outrate, transition = .05):
             self.naiverate = naiverate
